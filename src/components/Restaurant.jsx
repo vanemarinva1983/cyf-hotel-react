@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import RestaurantButton from "./RestaurantButton";
 import Order from "./Order";
 
 const Restaurant = () => {
@@ -10,17 +11,9 @@ const Restaurant = () => {
     <div className="restaurant-style">
       <h3>Restaurant Orders</h3>
       <ul>
-        <li>
-          Pizzas: {orders}{" "}
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              setOrders(orders + 1);
-            }}
-          >
-            Add
-          </button>
-        </li>
+        <Order orderType="Pizzas" />
+        <Order orderType="Chocolate Cake" />
+        <Order orderType="Salads" />
       </ul>
     </div>
   );

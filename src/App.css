@@ -1,6 +1,5 @@
 .App {
   text-align: left;
-  border: 1px red solid;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +8,6 @@
 .card-container {
   display: flex;
   width: 800px;
-  border: 1px solid blue;
   margin: auto;
 }
 .App-logo {
@@ -64,4 +62,8 @@ tr {
 
 .card {
   width: 18rem;
+}
+
+.restaurant-style {
+  text-align: center;
 }
