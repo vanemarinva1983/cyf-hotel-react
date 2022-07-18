@@ -5,12 +5,20 @@ import FakeBookings from "../data/fakeBookings.json";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [initialBookings, setInitialBookings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const API_URL = "https://cyf-react.glitch.me/error";
+  const API_URL = "https://cyf-react.glitch.me";
+  const API_URL_DELAYED = "https://cyf-react.glitch.me/delayed";
+  const API_URL_ERROR = "https://cyf-react.glitch.me/error";
 
   const search = searchVal => {
+    if (searchVal === "") {
+      setBookings(initialBookings);
+      return;
+    }
+
     const filteredBookings = bookings.filter(
       booking =>
         booking.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
@@ -22,11 +30,20 @@ const Bookings = () => {
   useEffect(() => {
     setLoading(true);
     fetch(API_URL)
+      .then(res => res.json())
       .then(data => {
-        return data.json();
+        if (data.error) {
+          setLoading(false);
+          setError(data.error);
+        } else {
+          setBookings(data);
+          setInitialBookings(data);
+          setLoading(false);
+        }
       })
-      .then(json => {
-        setError(json.error);
+      .catch(err => {
+        console.log(err);
+        setError(err.error);
         setLoading(false);
       });
   }, []);
